@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Edit Task {% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/add_or_edit_task_styles.css' %}">  
+    
+    <h1>Edit Task</h1>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="task_title">Task Title:</label>
+        <input type="text" id="task_title" name="task_title" placeholder="Enter task title" value="{{ task.title }}" required><br>
+
+        <label for="complete_by_date">Complete by:</label>
+        <input type="date" id="complete_by_date" name="complete_by_date" value="{{ task.complete_by_date|date:'Y-m-d' }}" required><br>
+
+        <label for="task">Task:</label>
+        <textarea name="task" id="task" placeholder="Edit task" rows="6" cols="60" required>{{ task.description }}</textarea><br>
+
+        <button type="submit">Edit Task</button>
+    </form>
+{% endblock %}    
+    

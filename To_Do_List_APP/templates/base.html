@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %} To-Do-List-App{% endblock %}
+    </title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/home_styles.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'add_task' %}">Add Task</a></li>
+                <li><a href="{% url 'list_user_tasks' %}">My Tasks</a></li>
+                <!-- Optionally, you can add more user-specific links here -->
+            {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    
+    
+    {% block content %}
+    <h1>To-Do-List-App</h1>
+    {% endblock %}
+    
+    <footer>
+        <p>&copy; 2024 To-Do-List-App by Pranav. All rights reserved.</p>
+    </footer>
+</body>
+</html>

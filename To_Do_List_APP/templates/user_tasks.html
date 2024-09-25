@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} To do List {% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/user_tasks_styles.css' %}">    
+
+    <h1>Welcome {{request.user}}😊</h1>
+    <h2>Events to do...</h2>
+    <div class="task-grid">
+        {% if tasks %}
+            {% for task_obj in tasks %}
+                <div class="task-item">
+                    <strong>{{ task_obj.title }}</strong> - <small>[{{ task_obj.complete_by_date }}]</small>
+                    <p>{{ task_obj.description }}</p>
+                    <small>
+                        <a href="{% url 'edit_task' task_obj.id %}" class="button edit-btn">Edit</a>
+                        <a href="{% url 'delete_task' task_obj.id %}" class="button delete-btn">Delete</a>
+                    </small>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div style="text-align: center; margin-top: 20px;">No tasks available - <a href="{% url 'add_task' %}">👉Add new task</a></div>
+        {% endif %}
+    </div>
+{% endblock %}
